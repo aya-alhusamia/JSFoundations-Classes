@@ -68,8 +68,8 @@ class Wallet {
  * let person = new Person(name, x, y);
  **********************************************************/
 class Person {
-  constructor(x, y, name= "aya"){
-    this.name = name;
+  constructor(x, y, name){
+    this.name = name
     this.location= new Point(x,y);
     this.wallet= new Wallet();
   }
@@ -103,8 +103,10 @@ class Vendor extends Person {
   price= 1;
      
     sellTo=(customer, numberOfIceCreams)=>{
-     customer = this.location;
      this.moveTo(customer.location)
+     let cost= this.price* numberOfIceCreams
+     customer.wallet.debit(cost)
+     this.wallet.credit(cost)
     }
   
   
