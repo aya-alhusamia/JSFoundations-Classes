@@ -47,12 +47,12 @@ class Wallet {
     this .money = money;
   }
 
-  credit = amount => {
-    this.amount = amount+ this.money
+  credit =( amount) => {
+    this.money = this.money + amount
   };
 
-  debit = amount => {
-    this.amount= amount-this.money
+  debit = (amount) => {
+    this.money = this.money - amount
   };
 }
 
@@ -68,7 +68,7 @@ class Wallet {
  * let person = new Person(name, x, y);
  **********************************************************/
 class Person {
-  constructor(x, y, name){
+  constructor(x, y, name= "aya"){
     this.name = name;
     this.location= new Point(x,y);
     this.wallet= new Wallet();
@@ -136,17 +136,21 @@ class Customer extends Person {
   
   // implement Customer!
   _isInRange =(vendor)=>{
-   if(vendor.location.distanceTo(this.location) <= vendor.range)
-   return true
+   if(vendor.location.distanceTo(this.location) <= vendor.range){
+      return true
+   }
+  
    return false
   }
   _haveEnoughMoney=(vendor, numberOfIceCreams)=>{
-    if(this.wallet.money >= numberOfIceCreams * vendor.price)
-    return true 
+    if(this.wallet.money >= numberOfIceCreams * vendor.price){
+      return true 
+    }
+    
     return false
   }
   requestIceCream=(vendor, numberOfIceCreams)=>{
-if(this._isInRange (vendor)&& this._haveEnoughMoney(numberOfIceCreams)){
+if(this._isInRange (vendor)&& this._haveEnoughMoney(vendor,numberOfIceCreams)){
   vendor.sellTo(this.numberOfIceCreams)
 }
   }
