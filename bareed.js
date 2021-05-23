@@ -68,10 +68,10 @@ class Wallet {
  * let person = new Person(name, x, y);
  **********************************************************/
 class Person {
-  constructor(x, y, name){
+  constructor( name,x, y){
     this.name = name
     this.location= new Point(x,y);
-    this.wallet= new Wallet();
+    this.wallet= new Wallet(0);
   }
    moveTo= (point)=>{
      this.location = point
@@ -132,16 +132,23 @@ class Vendor extends Person {
 class Customer extends Person {
   constructor(name,x,y){
     super(name,x,y)
+    this.wallet = new Wallet(10);
   }
   
-  wallet = new Wallet(10);
+  
   
   // implement Customer!
   _isInRange =(vendor)=>{
-   this.location.distanceTo(vendor.location)<= vendor.range
+    if(vendor.location.distanceTo(this.location) <= vendor.range){
+      return true
+    }
+    return false
   }
   _haveEnoughMoney=(vendor, numberOfIceCreams)=>{
-   this.wallet.money >= numberOfIceCreams*vendor.price
+    if(this.wallet.money >= numberOfIceCreams * vendor.price){
+      return true
+    }
+    return false
   }
   requestIceCream=(vendor, numberOfIceCreams)=>{
  if(this._isInRange(vendor) && this._haveEnoughMoney(vendor,numberOfIceCreams))
