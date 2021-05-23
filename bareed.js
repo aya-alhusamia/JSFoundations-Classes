@@ -143,19 +143,19 @@ class Customer extends Person {
       return true
     }
     return false
-  }
+   }
   _haveEnoughMoney=(vendor, numberOfIceCreams)=>{
     if(this.wallet.money >= numberOfIceCreams * vendor.price){
       return true
     }
     return false
-  }
+   }
   requestIceCream=(vendor, numberOfIceCreams)=>{
- if(this._isInRange(vendor) && this._haveEnoughMoney(vendor,numberOfIceCreams))
- vendor.sellTo(this.numberOfIceCreams)
-  }
+if(this._isInRange(vendor) && this._haveEnoughMoney(vendor,numberOfIceCreams)){
+vendor.sellTo(this,numberOfIceCreams)
 }
-
+}
+}
 export { Point, Wallet, Person, Customer, Vendor };
 
 /***********************************************************
